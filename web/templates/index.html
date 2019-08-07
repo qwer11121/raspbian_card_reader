@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+    <head>
+        <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+        <link rel="shortcut icon" href="{{ url_for('static', filename='image/favicon.png') }}">
+        <title>{{ title }}</title>
+        <script src="{{ url_for('static', filename='main.js') }}"></script>
+    </head>
+
+    <body>
+	<div>
+	    <select id="device_list">
+	        {{ device_list|safe }}
+	    </select>
+	    <button type="button" onclick="set_device()">Select</button>
+	</div>
+        <div>
+            <div id="service_status">{{ status }}</div>
+            <button type="button" onclick="start_service()">Start</button>
+            <button type="button" onclick="stop_service()">Stop</button>
+        </div>
+        <div>
+            <form action="{{ url_for('show_data') }}" method="POST">
+                <input type="date" name="start_date" value="{{ start_date_value }}">
+                <input type="date" name="end_date" value="{{ end_date_value }}">
+                <input type="submit">
+            </form>
+        </div>        
+        <div>
+            <table class="blueTable">
+                <tr>
+                    <th>Card</th>
+                    <th>Time</th>
+                </tr>
+                {{ table|safe }}
+            </table>
+        </div>
+    </body>
+</html>
